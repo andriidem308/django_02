@@ -1,0 +1,1 @@
+"""Init Class of Migration."""
