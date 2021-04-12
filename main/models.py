@@ -29,12 +29,12 @@ class Subscriber(models.Model):
     class Meta:
         """Subscriber Model Meta."""
 
+        unique_together = ['email_to', 'author_id']
         db_table = "tb_subscribers"
         verbose_name_plural = "Подписчики"
         verbose_name = "Подписчик"
     email_to = models.EmailField("Почта подписчика", max_length=80)
     author_id = models.ForeignKey("Author", on_delete=models.CASCADE)
-    """Setup name and email fields types and lengths."""
 
     def __str__(self):
         """Print Author Email."""
@@ -50,9 +50,10 @@ class Post(models.Model):
         db_table = "tb_posts"
         verbose_name = "Пост"
         verbose_name_plural = "Посты"
-    title = models.CharField("Заголовок", max_length=70)
-    description = models.TextField("Описание", max_length=90)
-    content = models.TextField("Содержимое")
+    """Setup title, description, content and dates of posts."""
+    title = models.CharField("Заголовок поста", max_length=70)
+    description = models.TextField("Описание поста", max_length=90)
+    content = models.TextField("Контент поста")
     created = models.DateTimeField(auto_now_add=True)
     updated = models.DateTimeField(default=now)
 
