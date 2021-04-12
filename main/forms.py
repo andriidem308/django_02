@@ -1,7 +1,8 @@
 """Project forms."""
-from django.forms import ModelForm, Select, Textarea, TextInput
+from django import forms
+from django.forms import ModelForm, Textarea, TextInput
 
-from .models import Post, Subscriber
+from .models import Author, Post, Subscriber
 
 
 class PostForm(ModelForm):
@@ -31,6 +32,14 @@ class PostForm(ModelForm):
 class SubscriberForm(ModelForm):
     """Subscriber Form."""
 
+    author_id = forms.ModelChoiceField(
+        queryset=Author.objects.all().order_by('name'),
+        empty_label="Выберите автора",
+        widget=forms.Select(
+            attrs={"class": "form-control"}
+        )
+    )
+
     class Meta:
         """Subscriber Form Meta."""
 
@@ -40,10 +49,7 @@ class SubscriberForm(ModelForm):
             "email_to": TextInput(attrs={
                 "class": "form-control",
                 "placeholder": "Email подписчика "
-            }),
-            "author_id": Select(attrs={
-                "class": "form-control",
-                "placeholder": "Автор ID"
-            }),
+            }
 
+            ),
         }

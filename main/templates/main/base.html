@@ -13,11 +13,13 @@
 <nav class="nav justify-content-between bg-primary">
     <a class="p-3 text-white link-secondary" href="{% url "homepage" %}">Homepage</a>
     <a class="p-3 text-white link-secondary" href="{% url "about" %}">About</a>
-    <a class="p-3 text-white link-secondary" href="{% url "posts" %}">Posts</a>
+    <a class="p-3 text-white link-secondary" href="{% url "posts_all" %}">Posts</a>
     <a class="p-3 text-white link-secondary" href="{% url "post_create" %}">Create Post</a>
+    <a class="p-3 text-white link-secondary" href="{% url "subscribers_new" %}">Подписаться на автора</a>
+    <a class="p-3 text-white link-secondary" href="{% url "authors_new" %}">Сгенерировать автора</a>
+    <a class="p-3 text-white link-secondary" href="{% url "authors_all" %}">Все авторы</a>
     <a class="p-3 text-white link-secondary" href="{% url "api_posts" %}">API</a>
-    <a class="p-3 text-white link-secondary" href="{% url "posts_subscribe" %}">Subscribe</a>
-    </nav>
+</nav>
 <div class="p-4">
     <div>
       {% block content %}{% endblock %}
