@@ -1,0 +1,30 @@
+{% extends "main/base.html" %}
+
+{% block title %}{{ title }}{% endblock %}
+{% block  content %}
+    <div class="container">
+        <h1>{{ title }}</h1>
+        <div class="payload">
+            <table class="table table-hover">
+                <thead>
+                <tr>
+                    <th scope="col"><span style="color: black; ">ID</span></th>
+                    <th scope="col"><span style="color: black; ">Книга</span></th>
+                    <th scope="col"><span style="color: black; ">Автор</span></th>
+                    <th scope="col"><span style="color: black; ">Категория</span></th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for book in books %}
+                <tr>
+                    <th scope="row"><span style="color: #727272; ">{{ book.id }}</span></th>
+                    <th scope="row"><span style="color: #727272; ">{{ book.title }}</span></th>
+                    <th scope="row"><span style="color: #727272; ">{{ book.author }}</span></th>
+                    <th scope="row"><span style="color: #727272; ">{{ book.category }}</span></th>
+                </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+{% endblock %}

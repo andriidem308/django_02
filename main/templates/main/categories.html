@@ -9,18 +9,16 @@
                 <thead>
                 <tr>
                     <th scope="col"><span style="color: black; ">ID</span></th>
-                    <th scope="col"><span style="color: black; ">Имя</span></th>
-                    <th scope="col"><span style="color: black; ">Почта</span></th>
+                    <th scope="col"><span style="color: black; ">Категория</span></th>
                     <th scope="col"><span style="color: black; ">Количество книг</span></th>
                 </tr>
                 </thead>
                 <tbody>
-                {% for author in authors %}
+                {% for category in categories %}
                 <tr>
-                    <th scope="row"><span style="color: #727272; ">{{ author.id }}</span></th>
-                    <th scope="row"><span style="color: #727272; ">{{ author.name }} {{ author.surname }}</span></th>
-                    <th scope="row"><span style="color: #727272; ">{{ author.email }}</span></th>
-                    <th scope="row"><span style="color: #727272; ">{{ author.books.count }}</span></th>
+                    <th scope="row"><span style="color: #727272; ">{{ category.id }}</span></th>
+                    <th scope="row"><span style="color: #727272; ">{{ category.name }}</span></th>
+                    <th scope="row"><span style="color: #727272; ">{{ category.books.count }}</span></th>
                 </tr>
                 {% endfor %}
                 </tbody>

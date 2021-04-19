@@ -13,13 +13,15 @@
 <nav class="nav justify-content-between bg-primary">
     <a class="p-3 text-white link-secondary" href="{% url "homepage" %}">Домашняя</i></a>
     <a class="p-3 text-white link-secondary" href="{% url "about" %}">Про сайт</a>
-    <a class="p-3 text-white link-secondary" href="{% url "posts_all" %}">Посты</a>
-    <a class="p-3 text-white link-secondary" href="{% url "post_create" %}">Создать Пост</a>
-    <a class="p-3 text-white link-secondary" href="{% url "subscribers_new" %}">Подписаться на автора</a>
+{#    <a class="p-3 text-white link-secondary" href="{% url "posts_all" %}">Посты</a>#}
+{#    <a class="p-3 text-white link-secondary" href="{% url "post_create" %}">Создать Пост</a>#}
+{#    <a class="p-3 text-white link-secondary" href="{% url "subscribers_new" %}">Подписаться на автора</a>#}
     <a class="p-3 text-white link-secondary" href="{% url "authors_new" %}">Сгенерировать автора</a>
     <a class="p-3 text-white link-secondary" href="{% url "authors_all" %}">Все авторы</a>
-    <a class="p-3 text-white link-secondary" href="{% url "email_subscribers" %}">Оповестить подписчиков</a>
-    <a class="p-3 text-white link-secondary" href="{% url "api_posts" %}">API</a>
+{#    <a class="p-3 text-white link-secondary" href="{% url "email_subscribers" %}">Оповестить подписчиков</a>#}
+{#    <a class="p-3 text-white link-secondary" href="{% url "api_posts" %}">API</a>#}
+    <a href="{% url "books" %}" class="p-3 text-white link-secondary">Книги</a>
+    <a href="{% url "categories" %}" class="p-3 text-white link-secondary">Категории</a>
 </nav>
 <div class="p-4">
     <div>
