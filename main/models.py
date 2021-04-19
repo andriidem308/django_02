@@ -43,6 +43,7 @@ class Subscriber(models.Model):
         db_table = "tb_subscribers"
         verbose_name_plural = "Подписчики"
         verbose_name = "Подписчик"
+
     email_to = models.EmailField("Почта подписчика", max_length=80)
     author_id = models.ForeignKey("Author", on_delete=models.CASCADE)
 

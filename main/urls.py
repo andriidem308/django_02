@@ -5,8 +5,6 @@ from django.urls import path
 from django.views.generic import TemplateView
 
 from . import views
-
-
 urlpatterns = [
     # path('', views.index, name='homepage'),
     path('', TemplateView.as_view(template_name='main/index.html'), name='homepage'),
@@ -20,6 +18,7 @@ urlpatterns = [
 
     path('subcribers/new', views.subscribers_new, name='subscribers_new'),
     path('subcribers/all', views.subscribers_all, name='subscribers_all'),
+    path('subscribers/email', views.email_subscribers, name='email_subscribers'),
 
     path('authors/new', views.authors_new, name='authors_new'),
     path('authors/all', views.authors_all, name='authors_all'),

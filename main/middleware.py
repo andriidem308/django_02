@@ -10,19 +10,14 @@ class SimpleMiddleware:
     def __init__(self, get_response):
         """Simple-Middleware Init."""
         self.get_response = get_response
-        # One-time configuration and initialization.
 
     def __call__(self, request):
         """Simple-Middleware Call."""
-        print('before')
-        # Code to be executed for each request before
-        # the view (and later middleware) are called.
-        st = time()
+        print('*** BEFORE ***')
+        start_time = time()
         response = self.get_response(request)
-        print('after')
-        print(f"Time executed:{time() - st}; path:{request.path}")
-        # Code to be executed for each request/response after
-        # the view is called.
+        print('*** AFTER ***')
+        print(f"EXECUTION TIME: {time() - start_time}; path:{request.path}")
 
         return response
 
@@ -51,7 +46,7 @@ class LogMiddleware:
         response = self.get_response(request)
 
         if request.method == "GET":
-            print("lets go!")
+            print("PROCESSING...")
             st = time()
             path = request.get_full_path()
             user_ip = get_client_ip(request)
