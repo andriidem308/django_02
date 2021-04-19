@@ -33,6 +33,42 @@ class Author(models.Model):
         return f'{self.name} {self.surname}'
 
 
+class Book(models.Model):
+    """Book Model."""
+
+    class Meta:
+        """Book Meta."""
+
+        db_table = 'tb_books'
+        verbose_name = 'Книга'
+        verbose_name_plural = 'Книги'
+
+    title = models.CharField('Заголовок', max_length=40)
+    author = models.ForeignKey('Author', models.CASCADE, related_name='books')
+    category = models.ForeignKey('Category', models.CASCADE, related_name='books')
+
+    def __str__(self):
+        """Print Book."""
+        return self.title
+
+
+class Category(models.Model):
+    """Category Model."""
+
+    class Meta:
+        """Category Meta."""
+
+        db_table = 'tb_categories'
+        verbose_name = 'Категория'
+        verbose_name_plural = 'Категории'
+
+    name = models.CharField('Категория', max_length=40)
+
+    def __str__(self):
+        """Print Category."""
+        return self.name
+
+
 class Subscriber(models.Model):
     """Subscriber Model."""
 

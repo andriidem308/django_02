@@ -5,7 +5,7 @@ from django.http import JsonResponse
 from django.shortcuts import get_object_or_404, redirect, render
 from faker import Faker
 from main.forms import PostForm, SubscriberForm
-from main.models import Author, Post, Subscriber
+from main.models import Author, Book, Category, Post, Subscriber
 from main.services.notify_service import notify
 from main.services.post_service import comment_method, post_all, post_find
 from main.services.subscribe_service import subscribe
@@ -96,8 +96,20 @@ def authors_new(request):
 
 def authors_all(request):
     """Route to Authors List."""
-    all_authors = Author.objects.all()
+    all_authors = Author.objects.all().prefetch_related('books')
     return render(request, "main/authors_all.html", {"title": "Авторы", "authors": all_authors})
+
+
+def books(request):
+    """Route to Books."""
+    all_books = Book.objects.all().select_related('author', 'category')
+    return render(request, 'main/books.html', {'title': 'Книги', 'books': all_books})
+
+
+def categories(request):
+    """Route to Categories."""
+    all_categories = Category.objects.only('name').distinct().prefetch_related('books')
+    return render(request, 'main/categories.html', {'title': 'Категории', 'categories': all_categories})
 
 
 def post_update(request, post_id):
