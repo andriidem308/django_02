@@ -1,3 +1,4 @@
+"""Generating Books."""
 import random
 
 from django.core.management.base import BaseCommand
@@ -6,7 +7,10 @@ from main.models import Author, Book, Category
 
 
 class Command(BaseCommand):
+    """Class Command."""
+
     def handle(self, *args, **kwargs):
+        """Procedure which generate books."""
         fake = Faker()
 
         for _ in range(100):
