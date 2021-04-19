@@ -1,4 +1,6 @@
 """Django Views."""
+from time import time
+
 from django.http import JsonResponse
 from django.shortcuts import get_object_or_404, redirect, render
 from faker import Faker
@@ -7,6 +9,7 @@ from main.models import Author, Post, Subscriber
 from main.services.notify_service import notify
 from main.services.post_service import comment_method, post_all, post_find
 from main.services.subscribe_service import subscribe
+from main.tasks import notify_subscriber_sync, notify_subscribers
 
 
 def index(request):
@@ -42,16 +45,23 @@ def post_create(request):
 
 def subscribers_new(request):
     """Route to Subscribe Author."""
+    success = False
+    email_to = request.POST.get('email_to')
     errors = ''
     if request.method == "POST":
         form = SubscriberForm(request.POST)
         if form.is_valid():
             form.save()
-            return redirect("subscribers_all")
+            success = True
         else:
             errors = form.errors
     else:
         form = SubscriberForm()
+
+    if success:
+        notify_subscriber_sync.delay(email_to)
+        return redirect('subscribers_all')
+
     context = {"form": form, "errors": errors}
     return render(request, "main/subscribers_new.html", context=context)
 
@@ -66,6 +76,15 @@ def subscribers_all(request):
     """Route to All Subscribers."""
     all_subs = Subscriber.objects.all()
     return render(request, "main/subscribers_all.html", {"title": "Все подписки", "subscribers_all": all_subs})
+
+
+def email_subscribers(request):
+    """Route for Email All Subscribers."""
+    start_time = time()
+    notify_subscribers.delay()
+    end_time = time() - start_time
+    print(end_time)
+    return redirect('homepage')
 
 
 def authors_new(request):
