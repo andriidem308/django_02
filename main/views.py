@@ -5,7 +5,7 @@ from faker import Faker
 from main.forms import PostForm, SubscriberForm
 from main.models import Author, Post, Subscriber
 from main.services.notify_service import notify
-from main.services.post_service import post_all, post_find
+from main.services.post_service import comment_method, post_all, post_find
 from main.services.subscribe_service import subscribe
 
 
@@ -105,7 +105,9 @@ def post_update(request, post_id):
 def post_show(request, post_id):
     """Route to Post by ID."""
     pst = post_find(post_id)
-    return render(request, "main/post_show.html", {"title": pst.title, "pst": pst})
+    comment_form, comments = comment_method(pst, request)
+    return render(request, "main/post_show.html",
+                  {"title": pst.title, "pst": pst, "comments": comments, "comment_form": comment_form})
 
 
 def api_authors_new(request):
