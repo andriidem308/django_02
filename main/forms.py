@@ -1,8 +1,8 @@
 """Project forms."""
 from django import forms
-from django.forms import ModelForm, Textarea, TextInput
+from django.forms import ModelForm, Select, Textarea, TextInput
 
-from .models import Author, Post, Subscriber
+from .models import Author, Comments, Post, Subscriber
 
 
 class PostForm(ModelForm):
@@ -28,6 +28,38 @@ class PostForm(ModelForm):
             })
         }
 
+        def save(self, commit=True):
+            """Manual save method for Subscriber."""
+            print("Subscriber before save")
+            # form.ModelForm.save(self,commit)
+            sbr = super().save(commit=False)
+            sbr.email_to = sbr.email_to.title()
+            sbr.save()
+            return sbr
+
+
+class CommentsForm(ModelForm):
+    """CommentsForm Class."""
+
+    class Meta:
+        """CommentsForm Meta."""
+
+        model = Comments
+        fields = ['body', 'subs_id']
+        widgets = {
+            "body": TextInput(attrs={
+                "class": "form-control",
+                "placeholder": "Ваш комментариий"
+            }
+
+            ),
+            "subs_id": Select(attrs={
+                "class": "form-control",
+                "placeholder": "подписчика ID"
+            }),
+
+        }
+
 
 class SubscriberForm(ModelForm):
     """Subscriber Form."""
@@ -50,6 +82,5 @@ class SubscriberForm(ModelForm):
                 "class": "form-control",
                 "placeholder": "Email подписчика "
             }
-
             ),
         }

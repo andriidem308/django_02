@@ -8,8 +8,7 @@
             <ul>
                 {% for author in authors %}
                 <li class="row">
-                    <b># {{ author.id }} {{ author.name }}</b> <span class="grey">[{{ author.email }}]</span>
-
+                     <b># {{ author.id }} {{ author.name }} {{ author.surname }}</b> <span class="grey">[{{ author.email }}]</span>
                 </li>
                 <hr>
                 {% endfor %}

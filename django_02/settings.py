@@ -36,6 +36,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'debug_toolbar',
     'main',
+    'django_extensions',
 
 ]
 
@@ -48,6 +49,8 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'debug_toolbar.middleware.DebugToolbarMiddleware',
+    'main.middleware.SimpleMiddleware',
+    'main.middleware.LogMiddleware',
 ]
 
 ROOT_URLCONF = 'django_02.urls'
