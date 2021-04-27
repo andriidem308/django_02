@@ -147,3 +147,11 @@ class Comments(models.Model):
     def __str__(self):
         """Print Comment."""
         return "Comment by {} on {}".format(self.subs_id, self.post)
+
+
+class ContactUs(models.Model):
+    """Contact Us Model."""
+
+    email = models.EmailField()
+    subject = models.CharField(max_length=120)
+    msg = models.TextField()
