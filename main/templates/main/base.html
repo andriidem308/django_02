@@ -24,6 +24,7 @@
 {#    <a class="p-3 text-white link-secondary" href="{% url "api_posts" %}">API</a>#}
     <a href="{% url "books" %}" class="p-3 text-white link-secondary">Книги</a>
     <a href="{% url "categories" %}" class="p-3 text-white link-secondary">Категории</a>
+    <a class="p-3 text-white link-secondary" href="{% url "posts_xlsx" %}">Скачать Посты</a>
 </nav>
 <div class="content">
     {% block content %}{% endblock %}

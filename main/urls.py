@@ -29,6 +29,8 @@ urlpatterns = [
 
     path('contact-us/create/', views.ContactUsView.as_view(), name='contact-us-create'),
 
+    path('posts/list/xlsx', views.DownloadPostsXLSX.as_view(), name='posts_xlsx'),
+
     path('api/posts/', views.api_posts, name='api_posts'),
     path('api/subcribe/', views.api_subscribe, name='api_subscribe'),
     path('api/authors/new/', views.api_authors_new, name='api_authors_new'),
