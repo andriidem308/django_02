@@ -1,10 +1,11 @@
 """Django Views."""
+import io
 from time import time
 
-from django.http import JsonResponse
+from django.http import HttpResponse, JsonResponse
 from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse_lazy
-from django.views.generic import CreateView, ListView
+from django.views.generic import CreateView, ListView, View
 from faker import Faker
 from main.forms import PostForm, SubscriberForm
 from main.models import Author, Book, Category, ContactUs, Post, Subscriber
@@ -12,6 +13,7 @@ from main.services.notify_service import notify
 from main.services.post_service import comment_method, post_all, post_find
 from main.services.subscribe_service import subscribe
 from main.tasks import notify_subscriber_sync, notify_subscribers
+import xlsxwriter
 
 
 def index(request):
@@ -182,3 +184,29 @@ class ContactUsView(CreateView):
     success_url = reverse_lazy("homepage")
     model = ContactUs
     fields = ("email", "subject", "msg")
+
+
+class DownloadPostsXLSX(View):
+    """XLSX-Format Download."""
+
+    def get(self, request):
+        """Get method."""
+        output = io.BytesIO()
+        wb = xlsxwriter.Workbook(output)
+        ws = wb.add_worksheet()
+        all_p = Post.objects.all()
+        counter = 0
+        for p in all_p:
+            counter = counter + 1
+            ws.write(counter, 0, p.title)
+        wb.close()
+        output.seek(0)
+
+        f_name = 'Posts.xlsx'
+        response = HttpResponse(
+            output,
+            content_type='application/vnd.openxmlformats-officedocument.spreadsheetml.sheet'
+        )
+        response['Content-Disposition'] = 'attachment; filename=%s' % f_name
+
+        return response
