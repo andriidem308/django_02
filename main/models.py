@@ -35,6 +35,19 @@ class Author(models.Model):
         """Print Author Full Name."""
         return f'{self.name} {self.surname}'
 
+    def save(self, **kwargs):
+        """Save Author."""
+        super().save()
+        key = self.__class__.cache_key()
+        cache.delete(key)
+
+    @classmethod
+    def cache_key(cls):
+        """Get Cache Key."""
+        dt = datetime.today().strftime('%Y-%m-%d')
+        key = f'{dt}'
+        return key
+
 
 class Book(models.Model):
     """Book Model."""
@@ -70,6 +83,19 @@ class Category(models.Model):
     def __str__(self):
         """Print Category."""
         return self.name
+
+    def save(self, **kwargs):
+        """Save Category."""
+        super().save()
+        key = self.__class__.cache_key()
+        cache.delete(key)
+
+    @classmethod
+    def cache_key(cls):
+        """Get Cache Key."""
+        dt = datetime.today().strftime('%Y-%m-%d')
+        key = f'{dt}'
+        return key
 
 
 class Subscriber(models.Model):
