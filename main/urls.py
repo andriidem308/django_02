@@ -2,6 +2,7 @@
 # from django.contrib import admin
 # from django.conf.urls import url
 from django.urls import path
+from django.views.decorators import cache
 from django.views.generic import TemplateView
 
 from . import views
@@ -15,17 +16,20 @@ urlpatterns = [
     path('posts/update/<int:post_id>/', views.post_update, name='post_update'),
     path('posts/', views.posts_all, name='posts_all'),
     path('posts/<int:post_id>/', views.post_show, name='post_show'),
-    path('posts/list/', views.PostsListView.as_view(), name='post_list'),
+    # path('posts/list/', views.PostsListView.as_view(), name='post_list'),
+    path('posts/list/', cache.cache_page(120)(views.PostsListView.as_view()), name='post_list'),
 
     path('subcribers/new/', views.subscribers_new, name='subscribers_new'),
     path('subcribers/all/', views.subscribers_all, name='subscribers_all'),
     path('subscribers/email/', views.email_subscribers, name='email_subscribers'),
 
     path('authors/new/', views.authors_new, name='authors_new'),
-    path('authors/all/', views.authors_all, name='authors_all'),
+    # path('authors/all/', views.authors_all, name='authors_all'),
+    path('authors/all/', cache.cache_page(120)(views.authors_all), name='authors_all'),
 
     path('books/', views.books, name='books'),
-    path('categories/', views.categories, name='categories'),
+    # path('categories/', views.categories, name='categories'),
+    path('categories/', cache.cache_page(120)(views.categories), name='categories'),
 
     path('contact-us/create/', views.ContactUsView.as_view(), name='contact-us-create'),
 

@@ -1,4 +1,7 @@
 """Project Models."""
+from datetime import datetime
+
+from django.core.cache import cache
 from django.db import models
 from django.utils.timezone import now
 
@@ -108,6 +111,16 @@ class Post(models.Model):
         """Print Post Title."""
         return self.title
 
+    def save(self, **kwargs):
+        super().save()
+        key = self.__class__.cache_key()
+        cache.delete(key)
+
+    @classmethod
+    def cache_key(cls):
+        dt = datetime.today().strftime('%Y-%m-%d')
+        key = f'{dt}'
+        return key
 
 class Logger(models.Model):
     """Class Logger."""
