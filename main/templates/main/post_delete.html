@@ -1,0 +1,20 @@
+{% extends "main/base.html" %}
+
+{% block title %}{{ title }}{% endblock %}
+
+
+{% block  content %}
+    <div class="select2-container"></div>
+        <h1>Удалить пост</h1>
+    <h3>Удаление поста {{ post.title }}</h3>
+        <div class="payload">
+            <form method="post">
+                {% csrf_token %}
+                <strong>Удалить пост?</strong>
+                <br>
+                <br>
+                <button class="btn btn-danger">Удалить</button>
+            </form>
+        </div>
+
+{% endblock %} 

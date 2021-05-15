@@ -4,7 +4,9 @@ astroid==2.5.2
 async-generator==1.10
 attrs==20.3.0
 backcall==0.2.0
+bootstrap4==0.0.5
 bleach==3.2.1
+celery~=5.0.5
 certifi==2020.12.5
 cffi==1.14.3
 chardet==4.0.0
@@ -14,6 +16,7 @@ decorator==4.4.2
 defusedxml==0.6.0
 Django==3.1.7
 django-debug-toolbar==3.2
+django-extensions==3.1.2
 entrypoints==0.3
 Faker==6.6.2
 flake8==3.9.0
@@ -95,5 +98,4 @@ webencodings==0.5.1
 Werkzeug==1.0.1
 widgetsnbextension==3.5.1
 wrapt==1.12.1
-
-celery~=5.0.5
+XlsxWriter==1.4.3

@@ -38,8 +38,9 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'debug_toolbar',
     'django_extensions',
-    'main',
     'bootstrap4',
+    'main',
+    'account',
 ]
 
 CACHE = {
@@ -131,6 +132,8 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
 STATIC_URL = '/static/'
+
+AUTH_USER_MODEL = 'account.user'
 
 # TELEGRAM_BOT_API = "bot122456789"
 
