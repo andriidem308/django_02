@@ -1,6 +1,5 @@
 """Show Posts Method."""
 from django.core.cache import cache
-
 from main.forms import CommentsForm
 from main.models import Post
 

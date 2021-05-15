@@ -112,15 +112,18 @@ class Post(models.Model):
         return self.title
 
     def save(self, **kwargs):
+        """Save Post."""
         super().save()
         key = self.__class__.cache_key()
         cache.delete(key)
 
     @classmethod
     def cache_key(cls):
+        """Get Cache Key."""
         dt = datetime.today().strftime('%Y-%m-%d')
         key = f'{dt}'
         return key
+
 
 class Logger(models.Model):
     """Class Logger."""
