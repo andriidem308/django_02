@@ -14,6 +14,7 @@ urlpatterns = [
 
     path('posts/create/', views.post_create, name='post_create'),
     path('posts/update/<int:post_id>/', views.post_update, name='post_update'),
+    path('posts/<int:pk>/delete/', views.DeletePostView.as_view(), name='post_delete'),
     path('posts/', views.posts_all, name='posts_all'),
     path('posts/<int:post_id>/', views.post_show, name='post_show'),
     # path('posts/list/', views.PostsListView.as_view(), name='post_list'),
@@ -25,7 +26,9 @@ urlpatterns = [
 
     path('authors/new/', views.authors_new, name='authors_new'),
     # path('authors/all/', views.authors_all, name='authors_all'),
-    path('authors/all/', cache.cache_page(120)(views.authors_all), name='authors_all'),
+    # path('authors/all/', cache.cache_page(120)(views.authors_all), name='authors_all'),
+    path('authors/<int:pk>/delete/', views.DeleteAuthorsView.as_view(), name='author_delete'),
+    path('authors/all/', views.AuthorsListView.as_view(), name='authors_all'),
 
     path('books/', views.books, name='books'),
     # path('categories/', views.categories, name='categories'),

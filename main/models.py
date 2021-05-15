@@ -35,6 +35,25 @@ class Author(models.Model):
         """Print Author Full Name."""
         return f'{self.name} {self.surname}'
 
+    def save(self, **kwargs):
+        """Save in custom method for cache_page."""
+        super().save()
+        key = self.__class__.cache_key()
+        cache.delete(key)
+
+    def delete(self, **kwargs):
+        """Delete in custom method for cache_page."""
+        super().delete()
+        key = self.__class__.cache_key()
+        cache.delete(key)
+
+    @classmethod
+    def cache_key(cls):
+        """Save in custom cached method."""
+        dt = datetime.today().strftime('%y-%m-%d')
+        key = f'{dt}'
+        return key
+
 
 class Book(models.Model):
     """Book Model."""
