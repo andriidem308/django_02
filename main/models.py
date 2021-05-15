@@ -1,4 +1,7 @@
 """Project Models."""
+from datetime import datetime
+
+from django.core.cache import cache
 from django.db import models
 from django.utils.timezone import now
 
@@ -31,6 +34,19 @@ class Author(models.Model):
     def full_name(self):
         """Print Author Full Name."""
         return f'{self.name} {self.surname}'
+
+    def save(self, **kwargs):
+        """Save Author."""
+        super().save()
+        key = self.__class__.cache_key()
+        cache.delete(key)
+
+    @classmethod
+    def cache_key(cls):
+        """Get Cache Key."""
+        dt = datetime.today().strftime('%Y-%m-%d')
+        key = f'{dt}'
+        return key
 
 
 class Book(models.Model):
@@ -67,6 +83,19 @@ class Category(models.Model):
     def __str__(self):
         """Print Category."""
         return self.name
+
+    def save(self, **kwargs):
+        """Save Category."""
+        super().save()
+        key = self.__class__.cache_key()
+        cache.delete(key)
+
+    @classmethod
+    def cache_key(cls):
+        """Get Cache Key."""
+        dt = datetime.today().strftime('%Y-%m-%d')
+        key = f'{dt}'
+        return key
 
 
 class Subscriber(models.Model):
@@ -107,6 +136,19 @@ class Post(models.Model):
     def __str__(self):
         """Print Post Title."""
         return self.title
+
+    def save(self, **kwargs):
+        """Save Post."""
+        super().save()
+        key = self.__class__.cache_key()
+        cache.delete(key)
+
+    @classmethod
+    def cache_key(cls):
+        """Get Cache Key."""
+        dt = datetime.today().strftime('%Y-%m-%d')
+        key = f'{dt}'
+        return key
 
 
 class Logger(models.Model):
