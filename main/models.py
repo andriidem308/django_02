@@ -36,21 +36,15 @@ class Author(models.Model):
         return f'{self.name} {self.surname}'
 
     def save(self, **kwargs):
-        """Save in custom method for cache_page."""
+        """Save Author."""
         super().save()
-        key = self.__class__.cache_key()
-        cache.delete(key)
-
-    def delete(self, **kwargs):
-        """Delete in custom method for cache_page."""
-        super().delete()
         key = self.__class__.cache_key()
         cache.delete(key)
 
     @classmethod
     def cache_key(cls):
-        """Save in custom cached method."""
-        dt = datetime.today().strftime('%y-%m-%d')
+        """Get Cache Key."""
+        dt = datetime.today().strftime('%Y-%m-%d')
         key = f'{dt}'
         return key
 
@@ -89,6 +83,19 @@ class Category(models.Model):
     def __str__(self):
         """Print Category."""
         return self.name
+
+    def save(self, **kwargs):
+        """Save Category."""
+        super().save()
+        key = self.__class__.cache_key()
+        cache.delete(key)
+
+    @classmethod
+    def cache_key(cls):
+        """Get Cache Key."""
+        dt = datetime.today().strftime('%Y-%m-%d')
+        key = f'{dt}'
+        return key
 
 
 class Subscriber(models.Model):
