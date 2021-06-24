@@ -28,3 +28,9 @@ stop_nginx:
 
 reload_nginx:
 	systemctl reload nginx
+
+unittest:
+	pytest
+
+test:
+	pytest --cov=main --cov-report=html --cov-fail-under=40
