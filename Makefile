@@ -28,3 +28,12 @@ stop_nginx:
 
 reload_nginx:
 	systemctl reload nginx
+
+dkr-rn:
+	docker run --rm -t -d -p 8001:8111 --name ssb ssb:1.0
+
+dkr-bld:
+	docker build -t ssb:1.0 .
+
+dkr-st:
+	docker container stop ssb
