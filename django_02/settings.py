@@ -166,3 +166,7 @@ STATICFILES_DIRS = [
 ]
 
 STATIC_ROOT = os.path.join(BASE_DIR, '', 'static_content', 'static')
+
+DOMAIN = 'http://0.0.0.0:8000'
+LOGIN_REDIRECT_URL = '/'
+REDIRECT_FIELD_NAME = '/'
