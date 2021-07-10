@@ -1,5 +1,5 @@
 """Django admin method."""
-from account.models import Avatar, User, Profile
+from account.models import Avatar, Profile, User
 from django.contrib import admin
 # Register your models here.
 from main.models import Author, Comments, Logger, Post, Subscriber
