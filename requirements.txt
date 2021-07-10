@@ -23,7 +23,7 @@ Django==3.1.7
 django-debug-toolbar==3.2
 django-extensions==3.1.2
 entrypoints==0.3
-Faker==6.6.2
+Faker==8.10.0
 flake8==3.9.0
 flake8-builtins==1.5.3
 flake8-docstrings==1.6.0
