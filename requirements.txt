@@ -22,6 +22,7 @@ defusedxml==0.6.0
 Django==3.1.7
 django-debug-toolbar==3.2
 django-extensions==3.1.2
+djangorestframework==3.12.4
 entrypoints==0.3
 Faker==8.10.0
 flake8==3.9.0

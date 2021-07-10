@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'bootstrap4',
     'main',
     'account',
+    'rest_framework',
 ]
 
 CACHE = {
