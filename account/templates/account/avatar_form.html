@@ -4,16 +4,16 @@
 
 
 {% block  content %}
+
     <div class="select2-container"></div>
-        <h1>Сменить пароль</h1>
+        <h1>Загрузить аватар</h1>
         <div class="error"></div>
         <div class="payload">
-            <form method="post">
-                <b>Для пользователя: {{ request.user }}</b>
+            <form method="post" enctype="multipart/form-data">
                 {% csrf_token %}
-                {{ form.errors }}
                 {{form.as_p}}
-                <button class="btn btn-warning">Сохранить</button>
+                <button class="btn btn-primary">Сохранить</button>
             </form>
         </div>
+
 {% endblock %}
