@@ -135,6 +135,16 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'static')
+]
+
+STATIC_ROOT = os.path.join('/tmp', 'static_content', 'static')
+
+MEDIA_URL = '/media/'
+
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media_content')
+
 AUTH_USER_MODEL = 'account.user'
 
 # TELEGRAM_BOT_API = "bot122456789"
@@ -165,12 +175,6 @@ CELERY_BEAT_SCHEDULE = {
         'schedule': crontab(minute=0, hour=9),
     },
 }
-
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'main/static')
-]
-
-STATIC_ROOT = os.path.join(BASE_DIR, '', 'static_content', 'static')
 
 DOMAIN = 'http://0.0.0.0:8000'
 LOGIN_REDIRECT_URL = '/'
