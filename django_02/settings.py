@@ -7,6 +7,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.1/ref/settings/
 """
 
+import mimetypes
 import os
 from pathlib import Path
 
@@ -133,6 +134,9 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.1/howto/static-files/
 
+mimetypes.add_type("text/css", ".css", True)
+mimetypes.add_type("text/html", ".css", True)
+
 STATIC_URL = '/static/'
 
 STATICFILES_DIRS = [
@@ -175,7 +179,3 @@ CELERY_BEAT_SCHEDULE = {
         'schedule': crontab(minute=0, hour=9),
     },
 }
-
-DOMAIN = 'http://0.0.0.0:8000'
-LOGIN_REDIRECT_URL = '/'
-REDIRECT_FIELD_NAME = '/'
