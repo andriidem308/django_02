@@ -243,6 +243,13 @@ class AuthorsListView(ListView):
         return queryset
 
 
+class AuthorsListView2(ListView):
+    """Show list of posts ."""
+
+    model = Author
+    template_name = 'main/author_list_js.html'
+
+
 class DeletePostView(DeleteView):
     """Delete posts."""
 
