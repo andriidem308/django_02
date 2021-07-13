@@ -7,7 +7,9 @@ from django.http import HttpResponse, JsonResponse
 from django.shortcuts import get_object_or_404, redirect, render
 from django.urls import reverse_lazy
 from django.views.generic import CreateView, DeleteView, ListView, View
+from django_filters.views import FilterView
 from faker import Faker
+from main.filters import BooksFilter, PostFilter
 from main.forms import PostForm, SubscriberForm
 from main.models import Author, Book, Category, ContactUs, Post, Subscriber
 from main.services.notify_service import notify
@@ -172,19 +174,24 @@ def api_subscribe(request):
     return JsonResponse(data, safe=False)
 
 
-class PostsListView(ListView):
+class PostsListView(FilterView):
     """Show list of posts analogously."""
 
+    paginate_by = 10
+    template_name = 'main/post_list.html'
+    filterset_class = PostFilter
+
     def get_queryset(self):
-        """Set queryset to listview."""
+        """Return posts queryset."""
         queryset = Post.objects.all()
         return queryset
 
     def get_context_data(self, *args, **kwargs):
-        """Set context data for ListView."""
+        """Return posts context data."""
         context = super().get_context_data(*args, **kwargs)
+        context["get_params"] = '&'.join(f"{key}={val}" for key, val in self.request.GET.items() if key != "page")
         context["cnt"] = context['object_list'].count()
-        context["title"] = "Все посты"
+        context["title"] = "All posts"
         return context
 
 
@@ -250,3 +257,24 @@ class DeleteAuthorsView(DeleteView):
     model = Author
     template_name = "main/author_delete.html"
     success_url = reverse_lazy("authors_all")
+
+
+class BooksListView(FilterView):
+    """Show list of books analogously."""
+
+    paginate_by = 10
+    template_name = 'main/books_filter.html'
+    filterset_class = BooksFilter
+
+    def get_queryset(self):
+        """Return books queryset."""
+        queryset = Book.objects.all().only("title", "category").select_related("category")
+        return queryset
+
+    def get_context_data(self, *args, **kwargs):
+        """Return books context data."""
+        context = super().get_context_data(*args, **kwargs)
+        context["get_params"] = '&'.join(f"{key}={val}" for key, val in self.request.GET.items() if key != "page")
+        context["cnt"] = context['object_list'].count()
+        context["title"] = "All books"
+        return context

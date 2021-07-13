@@ -1,10 +1,10 @@
 """API urls."""
 
+from api.views import BooksAPIViewSet, PostAPIViewSet
 from rest_framework.routers import DefaultRouter
 
-from . import views
-
 router = DefaultRouter()
-router.register(prefix='posts', viewset=views.PostAPIViewSet, basename='post')
+router.register(prefix='posts', viewset=PostAPIViewSet, basename='post')
+router.register(prefix='books_view', viewset=BooksAPIViewSet, basename='book')
 
 urlpatterns = router.urls
