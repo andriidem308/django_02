@@ -21,17 +21,12 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/3.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-# SECRET_KEY = '3!oiz=fx_)-d0(v(2ja-&cpeb+fye%t9+l#5*%_bz7f+5pwfyz'
-SECRET_KEY = os.environ.get('SECRET_KEY')
+SECRET_KEY = '3!oiz=fx_)-d0(v(2ja-&cpeb+fye%t9+l#5*%_bz7f+5pwfyz'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-# DEBUG = False
-#
-# ALLOWED_HOSTS = ['*']
+DEBUG = False
 
-DEBUG = os.environ.get('DEBUG_MODE') == '1'
-
-ALLOWED_HOSTS = os.environ.get('ALLOWED_HOSTS').split(':')
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -144,6 +139,16 @@ mimetypes.add_type("text/html", ".css", True)
 
 STATIC_URL = '/static/'
 
+STATICFILES_DIRS = [
+    os.path.join(BASE_DIR, 'static')
+]
+
+STATIC_ROOT = os.path.join('/tmp', 'static_content', 'static')
+
+MEDIA_URL = '/media/'
+
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media_content')
+
 AUTH_USER_MODEL = 'account.user'
 
 # TELEGRAM_BOT_API = "bot122456789"
@@ -174,20 +179,3 @@ CELERY_BEAT_SCHEDULE = {
         'schedule': crontab(minute=0, hour=9),
     },
 }
-
-STATICFILES_DIRS = [
-    os.path.join(BASE_DIR, 'main/static')
-]
-
-# STATIC_ROOT = os.path.join(BASE_DIR, '', 'static_content', 'static')
-STATIC_ROOT = os.path.join('/tmp', 'static_content', 'static')
-
-if DEBUG:
-    import socket
-
-    DEBUG_TOOLBAR_PATCH_SETTINGS = True
-    INTERNAL_IPS = [socket.gethostbyname(socket.gethostname())[:-1] + '1']
-
-# DOMAIN = 'http://0.0.0.0:8000'
-# LOGIN_REDIRECT_URL = '/'
-# REDIRECT_FIELD_NAME = '/'

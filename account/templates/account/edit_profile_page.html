@@ -1,0 +1,33 @@
+{% extends "main/base.html" %}
+
+{% block title %}{{ title }}{% endblock %}
+
+
+{% block  content %}
+    {% if user.is_authenticated %}
+        {% if user.id == profile.user.id %}
+    <div class="select2-container"></div>
+        <h1>Change Profile</h1>
+
+        <div class="error">
+        {{ form.errors }}
+        {{ errors }}
+        </div>
+
+        <div class="payload">
+            <form method="post" enctype="multipart/form-data">
+                {% csrf_token %}
+                {{ form.as_p }}
+
+                <button class="btn btn-secondary">Update</button>
+            </form>
+        </div>
+
+
+    {% else %}
+        You are unable to access this page
+    {% endif %}
+        You are unable to edit other profile
+        {% else %}
+    {% endif %}
+{% endblock %}
