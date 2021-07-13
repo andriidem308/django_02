@@ -2,7 +2,7 @@
 # from django.contrib import admin
 # from django.conf.urls import url
 from django.conf.urls.static import static
-from django.urls import path
+from django.urls import include, path
 from django.views.decorators import cache
 from django.views.generic import TemplateView
 from django_02 import settings
@@ -44,4 +44,6 @@ urlpatterns = [
     path('api/posts/', views.api_posts, name='api_posts'),
     path('api/subcribe/', views.api_subscribe, name='api_subscribe'),
     path('api/authors/new/', views.api_authors_new, name='api_authors_new'),
+
+    path('api/v1/', include('api.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
