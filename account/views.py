@@ -29,7 +29,8 @@ class SignUpView(CreateView):
 class ActivateUserView(View):
     """Activate User."""
 
-    def get(self, request, confirmation_token):
+    @staticmethod
+    def get(request, confirmation_token):
         """Get User by token."""
         user = get_object_or_404(User, confirmation_token=confirmation_token)
         user.is_active = True

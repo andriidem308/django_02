@@ -21,5 +21,38 @@
             {% endfor %}
         </ul>
     </div>
+    <nav aria-label="Page navigation example">
+        <ul class="pagination">
+            <li class="page-item">
+                {% if is_paginated %}
+                    <ul class="pagination">
+                        {% if page_obj.has_previous %}
+                            <li><a class="page-link" href="?page={{ page_obj.previous_page_number }}{{ get_params }}">&laquo;</a></li>
+                        {% else %}
+                            <li class="page-item active">
+                                 <span class="sr-only">&laquo;</span>
+                            </li>
+                        {% endif %}
+                        {% for i in paginator.page_range %}
+                            {% if page_obj.number == i %}
+                                <li class="page-item active">
+                                    <a class="page-link" href={{ i }}>{{ i }}<span class="sr-only">(current)</span></a>
+                                </li>
+                            {% else %}
+                                <li><a class="page-link" href="?page={{ i }}{{ get_params }}">{{ i }}</a></li>
+                            {% endif %}
+                        {% endfor %}
+                        {% if page_obj.has_next %}
+                            <li><a class="page-link" href="?page={{ page_obj.next_page_number }}{{ get_params }}">&raquo;</a></li>
+                        {% else %}
+                            <li class="page-item active">
+                                 <span class="sr-only">&raquo;</span>
+                            </li>
+                        {% endif %}
+                    </ul>
+                {% endif %}
+            </li>
+        </ul>
+    </nav>
 </div>
 {% endblock %}
