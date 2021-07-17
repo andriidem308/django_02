@@ -47,4 +47,5 @@ urlpatterns = [
     path('api/authors/new/', views.api_authors_new, name='api_authors_new'),
 
     path('api/v1/', include('api.urls')),
+    path('posts-page/', TemplateView.as_view(template_name='main/posts_page.html'), name='posts_page'),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
